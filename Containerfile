@@ -1,4 +1,6 @@
-FROM docker.io/library/archlinux:latest
+FROM docker.io/library/archlinux:base-20260614.0.544538
+ENV LANG="en_US.UTF-8"
+
 
 ######################
 ## Base Image Setup ##
@@ -19,7 +21,7 @@ RUN pacman -Syu --noconfirm which git ripgrep \
 
 USER arch
 WORKDIR /home/arch
-
-COPY --chown=arch:arch home/arch/.bashrc /home/arch/.bashrc
+ENV HOME="/home/arch"
+ENV PATH="/home/arch/.local/bin:$PATH"
 
 RUN mkdir -p "$HOME/.local/bin"
